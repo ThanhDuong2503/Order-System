@@ -1,6 +1,7 @@
 package de.neuefische.OrderSystem.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Order {
 
@@ -16,6 +17,7 @@ public class Order {
     public String toString() {
         return "Order: " +
                 "ID: " + id +
-                " / Product: " + products;
+                " / Productlist: " + products;
     }
+
 }

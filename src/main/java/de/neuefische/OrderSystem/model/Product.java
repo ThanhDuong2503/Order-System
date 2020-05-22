@@ -1,5 +1,7 @@
 package de.neuefische.OrderSystem.model;
 
+import java.util.Objects;
+
 public class Product {
 
     private int id;
@@ -24,4 +26,6 @@ public class Product {
                 "ID: " + id +
                 " / Productname: " + name ;
     }
+
+
 }

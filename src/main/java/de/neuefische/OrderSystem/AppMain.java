@@ -13,11 +13,18 @@ public class AppMain {
         productDB.add(new Product(3, "BigMac"));
         productDB.add(new Product(4, "Chickenburger"));
 
-        System.out.println(productDB.getProductList());
+        System.out.println(productDB.getProducts());
+
+        System.out.println("------------------------------------------------------------------------------");
 
         OrderService orderService = new OrderService(productDB);
-        orderService.createOrder();
+        try{
+            orderService.createOrder();
+            orderService.printAllOrder();
+        }
+        catch (RuntimeException e) {
+            System.out.println(e);
+        }
 
-        orderService.printAllOrder();
     }
 }

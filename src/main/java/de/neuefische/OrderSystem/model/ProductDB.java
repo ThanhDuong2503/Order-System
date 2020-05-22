@@ -11,9 +11,20 @@ public class ProductDB {
         productList.add(product);
     }
 
-    public ArrayList<Product> getProductList() {
+    public ArrayList<Product> getProducts() {
         return productList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDB productDB = (ProductDB) o;
+        return Objects.equals(productList, productDB.productList);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(productList);
+    }
 }

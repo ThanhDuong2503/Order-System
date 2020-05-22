@@ -1,22 +1,26 @@
 package de.neuefische.OrderSystem.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OrderService {
 
-    private OrderDB orderDB = new OrderDB();
-    private ProductDB productDB = new ProductDB();
-    private ArrayList<Product> productslist = new ArrayList<Product>();
-
+    private final OrderDB orderDB = new OrderDB();
+    private final ProductDB productDB;
     public OrderService(ProductDB productDB) {
         this.productDB = productDB;
-
     }
+
     public void createOrder(){
-        productslist.add(productDB.getProductList().get(0));
-        productslist.add(productDB.getProductList().get(2));
+        ArrayList<Product> productslist = new ArrayList<Product>();
+        if(productslist.contains(productDB.getProducts())){
+        productslist.add(productDB.getProducts().get(0));
+        productslist.add(productDB.getProducts().get(1));
         Order order = new Order(1, productslist);
-        add(order);
+        add(order);}
+        else {
+            throw new RuntimeException("Product does not exist!");
+        }
     }
 
     public void add(Order order){
@@ -24,12 +28,20 @@ public class OrderService {
     }
 
     public void printAllOrder() {
-        System.out.print(orderDB.getOrderList().toString());
-
+        System.out.println(orderDB.getOrderList().toString());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderService that = (OrderService) o;
+        return Objects.equals(orderDB, that.orderDB) &&
+                Objects.equals(productDB, that.productDB);
+    }
 
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderDB, productDB);
+    }
 }
